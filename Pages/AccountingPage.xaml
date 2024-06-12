@@ -1,0 +1,66 @@
+﻿<Page x:Class="EducationalPractice.Pages.AccountingPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:EducationalPractice.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="AccountingPage">
+
+    <Grid Background="#F5F5F5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>
+            <ColumnDefinition Width="10*"></ColumnDefinition>
+            <ColumnDefinition></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="1" Grid.Column="1">
+            <StackPanel Margin="0 0 0 25">
+                <TextBlock HorizontalAlignment="Center">Учет посещения клиента</TextBlock>
+                <TextBlock HorizontalAlignment="Center" x:Name="TxtReception">Ресепшн оформляющий чек</TextBlock>
+            </StackPanel>
+            <StackPanel Width="350">
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Margin="0 0 10 0">Клиент:</TextBlock>
+                    <ComboBox x:Name="CbClients" SelectedIndex="0" Width="286" Height="22" SelectionChanged="CbClients_SelectionChanged"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Margin="0 0 10 0">Услуга:</TextBlock>
+                    <ComboBox x:Name="CbServices" SelectedIndex="0" Width="290" SelectionChanged="CbServices_SelectionChanged" Height="22"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Margin="0 0 10 0">Сколько бонусов использовать:</TextBlock>
+                    <TextBox x:Name="TbBonus" Width="60" Height="22" TextChanged="TbBonus_TextChanged"></TextBox>
+                    <TextBlock x:Name="TxtBonus" Margin="10 0 10 0" Foreground="Red">0</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Margin="0 0 10 0">Скидка (0, если нет):</TextBlock>
+                    <ComboBox x:Name="CbDiscounts" SelectedIndex="0" Width="216" SelectionChanged="CbDiscounts_SelectionChanged" Height="22"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="0 0 0 10">
+                    <TextBlock Margin="0 0 10 0">Мастер:</TextBlock>
+                    <ComboBox x:Name="CbMasters" SelectedIndex="0" Width="216" SelectionChanged="CbDiscounts_SelectionChanged" Height="22"></ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 0 0 10">
+                    <TextBlock Margin="0 0 10 0">Время:</TextBlock>
+                    <TextBlock x:Name="TbDatetime">0</TextBlock>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal"  Margin="0 0 0 25">
+                    <TextBlock Margin="0 0 10 0">Финальная стоимость услуги:</TextBlock>
+                    <TextBlock x:Name="finalAmount">0</TextBlock>
+                </StackPanel>
+                <StackPanel>
+                    <Button Width="150" Margin="0 0 0 5" Click="Save_Click" Background="#BCDFF8" Padding="25 5 25 5">сохранить</Button>
+                    <Button Width="150" Click="Back_Click" Background="#DEBCF8" Padding="25 5 25 5">отмена</Button>
+                </StackPanel>
+            </StackPanel>
+            
+        </StackPanel>
+    </Grid>
+</Page>
