@@ -1,0 +1,181 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище BeautySalonModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Categories">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Discounts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="size" Type="float" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Services">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="150" Nullable="false" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="category_id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="surname" Type="nvarchar" MaxLength="50" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="telephone_number" Type="nvarchar" MaxLength="11" Nullable="false" />
+    <Property Name="email" Type="nvarchar" MaxLength="100" />
+    <Property Name="bonus" Type="float" Nullable="false" />
+    <Property Name="role_id" Type="int" Nullable="false" />
+    <Property Name="password" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Users_Services">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_id" Type="int" Nullable="false" />
+    <Property Name="service_id" Type="int" Nullable="false" />
+    <Property Name="dicount_id" Type="int" Nullable="false" />
+    <Property Name="final_price" Type="float" Nullable="false" />
+    <Property Name="client_bonus" Type="float" Nullable="false" />
+    <Property Name="master_id" Type="int" Nullable="false" />
+    <Property Name="reception_id" Type="int" Nullable="false" />
+    <Property Name="datetime" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Services_Categories">
+    <End Role="Categories" Type="Self.Categories" Multiplicity="1" />
+    <End Role="Services" Type="Self.Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Categories">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Services">
+        <PropertyRef Name="category_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Roles">
+    <End Role="Roles" Type="Self.Roles" Multiplicity="1" />
+    <End Role="Users" Type="Self.Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users">
+        <PropertyRef Name="role_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Services_Discounts">
+    <End Role="Discounts" Type="Self.Discounts" Multiplicity="1" />
+    <End Role="Users_Services" Type="Self.Users_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Discounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Services">
+        <PropertyRef Name="dicount_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Services_Services">
+    <End Role="Services" Type="Self.Services" Multiplicity="1" />
+    <End Role="Users_Services" Type="Self.Users_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Services">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Services">
+        <PropertyRef Name="service_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Services_Users">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Users_Services" Type="Self.Users_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Services">
+        <PropertyRef Name="user_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Services_Users1">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Users_Services" Type="Self.Users_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Services">
+        <PropertyRef Name="master_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Users_Services_Users2">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="Users_Services" Type="Self.Users_Services" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="Users_Services">
+        <PropertyRef Name="reception_id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище BeautySalonModelContainer">
+    <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Discounts" EntityType="Self.Discounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Services" EntityType="Self.Services" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users_Services" EntityType="Self.Users_Services" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Services_Categories" Association="Self.FK_Services_Categories">
+      <End Role="Categories" EntitySet="Categories" />
+      <End Role="Services" EntitySet="Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Roles" Association="Self.FK_Users_Roles">
+      <End Role="Roles" EntitySet="Roles" />
+      <End Role="Users" EntitySet="Users" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Services_Discounts" Association="Self.FK_Users_Services_Discounts">
+      <End Role="Discounts" EntitySet="Discounts" />
+      <End Role="Users_Services" EntitySet="Users_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Services_Services" Association="Self.FK_Users_Services_Services">
+      <End Role="Services" EntitySet="Services" />
+      <End Role="Users_Services" EntitySet="Users_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Services_Users" Association="Self.FK_Users_Services_Users">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users_Services" EntitySet="Users_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Services_Users1" Association="Self.FK_Users_Services_Users1">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users_Services" EntitySet="Users_Services" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Users_Services_Users2" Association="Self.FK_Users_Services_Users2">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="Users_Services" EntitySet="Users_Services" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
